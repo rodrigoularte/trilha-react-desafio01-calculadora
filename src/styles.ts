@@ -11,8 +11,14 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
   background-color: #ffffff;
+  border: black 1px solid;
   width: 50%;
+  padding: 4px;
+  border-radius: 4px;
+  gap: 4px;
 `;
 
 export const Row = styled.div`
@@ -20,6 +26,7 @@ export const Row = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  gap: 4px;
 `;
 
 export const Column = styled.div`
