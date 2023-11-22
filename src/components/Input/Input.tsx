@@ -1,12 +1,17 @@
 import {FC} from 'react';
 import {InputContainer} from './styles';
 
-const Input: FC<{value: string}> = ({value}) => {
+const Input: FC<{value: string; calculation: string}> = ({
+  value,
+  calculation,
+}) => {
   return (
     <InputContainer>
-      {/* <div>
-        <span>{'5+5'}</span>
-      </div> */}
+      {calculation && (
+        <div>
+          <span>{calculation}</span>
+        </div>
+      )}
       <input disabled value={value} />
     </InputContainer>
   );

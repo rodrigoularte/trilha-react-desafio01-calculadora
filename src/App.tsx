@@ -8,11 +8,13 @@ const App = () => {
   const [currentNumber, setCurrentNumber] = useState('0');
   const [firstNumber, setFirstNumber] = useState('0');
   const [operation, setOperation] = useState('');
+  const [calculation, setCalculation] = useState('');
 
   const handleOnClear = () => {
     setCurrentNumber('0');
     setFirstNumber('0');
     setOperation('');
+    setCalculation('');
   };
 
   const handleAddNumber = (num: string) => {
@@ -22,27 +24,32 @@ const App = () => {
   const handleCalculate = (action: string) => {
     if (firstNumber === '0') {
       setFirstNumber(String(currentNumber));
+      setCalculation(`${currentNumber} ${action}`);
       setCurrentNumber('0');
       setOperation(action);
     } else {
       switch (action) {
         case '+':
           const addition = Number(firstNumber) + Number(currentNumber);
+          setCalculation(`${calculation} ${currentNumber} =`);
           setCurrentNumber(String(addition));
           setOperation('');
           break;
         case '-':
           const subtraction = Number(firstNumber) - Number(currentNumber);
+          setCalculation(`${calculation} ${currentNumber} =`);
           setCurrentNumber(String(subtraction));
           setOperation('');
           break;
         case '*':
           const multiplication = Number(firstNumber) * Number(currentNumber);
+          setCalculation(`${calculation} ${currentNumber} =`);
           setCurrentNumber(String(multiplication));
           setOperation('');
           break;
         case '/':
           const division = Number(firstNumber) / Number(currentNumber);
+          setCalculation(`${calculation} ${currentNumber} =`);
           setCurrentNumber(String(division));
           setOperation('');
           break;
@@ -61,7 +68,7 @@ const App = () => {
   return (
     <Container>
       <Content>
-        <Input value={currentNumber} />
+        <Input value={currentNumber} calculation={calculation} />
         <Row>
           <Button label="sqr" />
           <Button label="%" />
