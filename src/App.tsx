@@ -78,6 +78,16 @@ const App = () => {
     }
   };
 
+  const handleOnDelete = () => {
+    setCurrentNumber((prev) => {
+      if (prev.length === 1) {
+        return '0';
+      }
+
+      return prev.slice(0, -1);
+    });
+  };
+
   const handleOnClear = () => {
     setCurrentNumber('0');
     setFirstNumber('0');
@@ -96,7 +106,7 @@ const App = () => {
           <Button label="sqr" disabled />
           <Button label="%" disabled />
           <Button label="c" onClick={handleOnClear} />
-          <Button label="del" disabled />
+          <Button label="del" onClick={handleOnDelete} />
         </Row>
         <Row>
           <Button label="7" onClick={() => handleAddNumber('7')} />
