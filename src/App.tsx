@@ -90,10 +90,10 @@ const App = () => {
           calculation={calculation}
         />
         <Row>
-          <Button label="sqr" />
-          <Button label="%" />
+          <Button label="sqr" disabled />
+          <Button label="%" disabled />
           <Button label="c" onClick={handleOnClear} />
-          <Button label="del" />
+          <Button label="del" disabled />
         </Row>
         <Row>
           <Button label="7" onClick={() => handleAddNumber('7')} />

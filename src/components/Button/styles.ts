@@ -14,4 +14,8 @@ export const ButtonContainer = styled.button`
     cursor: pointer;
     background-color: #eeeeee;
   }
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #dfdfdf;
+  }
 `;
