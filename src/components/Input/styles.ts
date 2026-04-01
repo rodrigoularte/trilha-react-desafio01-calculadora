@@ -31,6 +31,5 @@ export const InputContainer = styled.div`
     color: black;
 
     text-align: right;
-    direction: rtl;
   }
 `;

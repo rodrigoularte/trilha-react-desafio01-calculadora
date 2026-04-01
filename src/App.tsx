@@ -10,6 +10,13 @@ const App = () => {
   const [operation, setOperation] = useState('');
   const [calculation, setCalculation] = useState('');
 
+  console.log({
+    currentNumber,
+    firstNumber,
+    operation,
+    calculation,
+  });
+
   const handleOnClear = () => {
     setCurrentNumber('0');
     setFirstNumber('0');
@@ -18,13 +25,23 @@ const App = () => {
   };
 
   const handleAddNumber = (num: string) => {
-    setCurrentNumber((prev) => `${prev === '0' ? '' : prev}${num}`);
+    setCurrentNumber((prev) => {
+      if (num === '.' && prev.includes('.')) {
+        return prev;
+      }
+
+      if (num === '.' && prev === '0') {
+        return '0.';
+      }
+
+      return `${prev === '0' ? '' : prev}${num}`;
+    });
   };
 
   const handleCalculate = (action: string) => {
     if (firstNumber === '0') {
       setFirstNumber(String(currentNumber));
-      setCalculation(`${currentNumber} ${action}`);
+      setCalculation(`${currentNumber.replace('.', ',')} ${action}`);
       setCurrentNumber('0');
       setOperation(action);
     } else {
@@ -41,13 +58,13 @@ const App = () => {
           setCurrentNumber(String(subtraction));
           setOperation('');
           break;
-        case '*':
+        case 'x':
           const multiplication = Number(firstNumber) * Number(currentNumber);
           setCalculation(`${calculation} ${currentNumber} =`);
           setCurrentNumber(String(multiplication));
           setOperation('');
           break;
-        case '/':
+        case '÷':
           const division = Number(firstNumber) / Number(currentNumber);
           setCalculation(`${calculation} ${currentNumber} =`);
           setCurrentNumber(String(division));
@@ -68,7 +85,10 @@ const App = () => {
   return (
     <Container>
       <Content>
-        <Input value={currentNumber} calculation={calculation} />
+        <Input
+          value={currentNumber.replace('.', ',')}
+          calculation={calculation}
+        />
         <Row>
           <Button label="sqr" />
           <Button label="%" />
@@ -79,13 +99,13 @@ const App = () => {
           <Button label="7" onClick={() => handleAddNumber('7')} />
           <Button label="8" onClick={() => handleAddNumber('8')} />
           <Button label="9" onClick={() => handleAddNumber('9')} />
-          <Button label="/" onClick={() => handleCalculate('/')} />
+          <Button label="÷" onClick={() => handleCalculate('÷')} />
         </Row>
         <Row>
           <Button label="4" onClick={() => handleAddNumber('4')} />
           <Button label="5" onClick={() => handleAddNumber('5')} />
           <Button label="6" onClick={() => handleAddNumber('6')} />
-          <Button label="x" onClick={() => handleCalculate('*')} />
+          <Button label="x" onClick={() => handleCalculate('x')} />
         </Row>
         <Row>
           <Button label="1" onClick={() => handleAddNumber('1')} />
@@ -95,7 +115,7 @@ const App = () => {
         </Row>
         <Row>
           <Button label="0" onClick={() => handleAddNumber('0')} />
-          <Button label="," />
+          <Button label="," onClick={() => handleAddNumber('.')} />
           <Button label="=" onClick={handleEquals} />
           <Button label="+" onClick={() => handleCalculate('+')} />
         </Row>

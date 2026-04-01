@@ -12,7 +12,7 @@ const Input: FC<{value: string; calculation: string}> = ({
           <span>{calculation}</span>
         </div>
       )}
-      <input disabled value={value} />
+      <input type="text" value={value} disabled />
     </InputContainer>
   );
 };
